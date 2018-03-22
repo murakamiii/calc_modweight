@@ -7,7 +7,7 @@ int clampWeightRange(int intValue)
     return std::clamp(intValue, 1, INT_MAX);
 }
 
-bool assertLowerIntMaxSqrt(int intValue)
+bool guardLowerIntMaxSqrt(int intValue)
 {
     return INT_MAX / intValue >= intValue; 
 }
@@ -36,13 +36,13 @@ class BodyData
         }
         int minWeight()
         {
-            if(!assertLowerIntMaxSqrt(height)) { return INT_MAX; }
+            if(!guardLowerIntMaxSqrt(height)) { return INT_MAX; }
             double d = (double)height * (double)height * 7.2 / 10000.0;
             return clampWeightRange((int)d);
         }
         int maxWeight()
         {
-            if(!assertLowerIntMaxSqrt(height)) { return INT_MAX; }
+            if(!guardLowerIntMaxSqrt(height)) { return INT_MAX; }
             double d = (double)height * (double)height * 24.0 / 10000.0;
             return clampWeightRange((int)d);
         }
@@ -58,7 +58,7 @@ class BodyData
 
 int main() {
     std::cout << "weightdiff" << std::endl;
-    BodyData bdata(72, 2147483647);
+    BodyData bdata(72, 102);
     std::cout << bdata.heightValue() << std::endl;
     std::cout << bdata.weightValue() << std::endl;
     std::cout << bdata.bmi() << std::endl;
