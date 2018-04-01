@@ -57,7 +57,9 @@ class BodyData
             if(!dist(engine)) { return delta; }
 
             // 与えられたdeltaに対して 痩せ&減量 || 肥満&増量ならdeltaは0
-            // 逆の関係ならdeltaが二倍になる 
+            // 逆の関係ならdeltaが二倍になる
+            
+            // TODO: abstructなBodyDataクラスを継承してUnderWeightBodyDataとOverWeightBodyDataに分けてみる
             if(std::signbit((double)delta) && std::signbit(weight - meanWeight())) {
                 return 0;
             } else {
